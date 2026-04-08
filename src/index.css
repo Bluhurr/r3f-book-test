@@ -6,7 +6,11 @@
 #root {
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(#5a47ce, #232323 80%);
+  background: radial-gradient(
+    circle,
+    rgba(235, 231, 176, 1) 57%,
+    rgba(201, 173, 81, 1) 100%
+  );
 }
 
 body {

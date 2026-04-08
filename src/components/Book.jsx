@@ -27,7 +27,7 @@ const turningCurveStrength = 0.09; // Controls the strength of the curve
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
-const PAGE_DEPTH = 0.003;
+const PAGE_DEPTH = 0.005;
 const PAGE_SEGMENTS = 30;
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
 
@@ -67,21 +67,29 @@ pageGeometry.setAttribute(
   new Float32BufferAttribute(skinWeights, 4)
 );
 
-const whiteColor = new Color("white");
-const emissiveColor = new Color("orange");
+const whiteColor = new Color("grey");
+const emissiveColor = new Color("white");
 
 const pageMaterials = [
   new MeshStandardMaterial({
     color: whiteColor,
+    roughness: 0.9,
+    metalness: 0,
   }),
   new MeshStandardMaterial({
     color: "#111",
+    roughness: 0.9,
+    metalness: 0,
   }),
   new MeshStandardMaterial({
     color: whiteColor,
+    roughness: 0.9,
+    metalness: 0,
   }),
   new MeshStandardMaterial({
     color: whiteColor,
+    roughness: 0.9,
+    metalness: 0,
   }),
 ];
 
@@ -127,26 +135,14 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
       new MeshStandardMaterial({
         color: whiteColor,
         map: picture,
-        ...(number === 0
-          ? {
-              roughnessMap: pictureRoughness,
-            }
-          : {
-              roughness: 0.1,
-            }),
+        roughness: 0.9,
         emissive: emissiveColor,
         emissiveIntensity: 0,
       }),
       new MeshStandardMaterial({
         color: whiteColor,
         map: picture2,
-        ...(number === pages.length - 1
-          ? {
-              roughnessMap: pictureRoughness,
-            }
-          : {
-              roughness: 0.1,
-            }),
+        roughness: 0.9,
         emissive: emissiveColor,
         emissiveIntensity: 0,
       }),
@@ -167,7 +163,7 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
       return;
     }
 
-    const emissiveIntensity = highlighted ? 0.22 : 0;
+    const emissiveIntensity = highlighted ? 0.1 : 0;
     skinnedMeshRef.current.material[4].emissiveIntensity =
       skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
         skinnedMeshRef.current.material[4].emissiveIntensity,
